@@ -1,5 +1,5 @@
 .bundle/
 log/*.log
 pkg/
-
+Gemfile.lock
 .internal_test_app
