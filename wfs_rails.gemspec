@@ -9,9 +9,8 @@ Gem::Specification.new do |s|
   s.version     = WfsRails::VERSION
   s.authors     = [""]
   s.email       = ["pjreed@stanford.edu"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of WfsRails."
-  s.description = "TODO: Description of WfsRails."
+  s.summary     = "Summary of WfsRails."
+  s.description = "Description of WfsRails."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]

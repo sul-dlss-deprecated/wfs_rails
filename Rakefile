@@ -6,4 +6,4 @@ end
 
 Bundler::GemHelper.install_tasks
 
-load 'tasks/wfs_rails_tasks.rake'
+require 'engine_cart/rake_task'
