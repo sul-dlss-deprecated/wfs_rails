@@ -5,7 +5,8 @@ RSpec.describe WfsRails::Workflow do
     described_class.create(
       druid: 'druid:abc123',
       datastream: 'accessionWF',
-      process: 'start-accession'
+      process: 'start-accession',
+      lifecycle: 'submitted'
     )
   end
   context 'with required values' do
@@ -17,6 +18,20 @@ RSpec.describe WfsRails::Workflow do
     subject { described_class.create }
     it 'is not valid' do
       expect(subject.valid?).to be false
+    end
+  end
+  describe '#as_milestone' do
+    builder = {}
+    before do
+      builder = Nokogiri::XML::Builder.new do |xml|
+        subject.as_milestone(xml)
+      end
+    end
+    let(:parsed_xml) { Nokogiri::XML(builder.to_xml) }
+    it 'serializes a Workflow as a milestone' do
+      expect(parsed_xml.at_xpath('//milestone'))
+        .to include ['date', //], ['version', /1/]
+      expect(parsed_xml.at_xpath('//milestone').content).to eq 'submitted'
     end
   end
 end
