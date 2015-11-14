@@ -22,5 +22,12 @@ module WfsRails
       ).order(:datastream, created_at: :asc).group_by(&:datastream)
       render :workflows
     end
+
+    def archive
+      @objects = Workflow.where(
+        repository: params[:repository],
+        datastream: params[:workflow]
+      ).count
+    end
   end
 end

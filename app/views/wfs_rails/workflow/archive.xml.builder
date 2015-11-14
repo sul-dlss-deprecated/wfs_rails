@@ -1,0 +1,1 @@
+xml.objects(count: @objects)

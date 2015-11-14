@@ -20,4 +20,12 @@ RSpec.describe WfsRails::WorkflowController do
       expect(response).to render_template 'workflows'
     end
   end
+  describe 'GET archive' do
+    it 'loads count of workflows' do
+      wf = FactoryGirl.create(:workflow, repository: 'dor')
+      get :archive, repository: wf.repository, workflow: wf.datastream, format: :xml
+      expect(assigns(:objects)).to eq 1
+      expect(response).to render_template 'archive'
+    end
+  end
 end
