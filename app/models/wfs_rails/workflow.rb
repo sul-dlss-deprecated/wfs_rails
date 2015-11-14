@@ -13,5 +13,22 @@ module WfsRails
         xml.text lifecycle
       end
     end
+
+    ##
+    # Serialize as WfsRails::Workflow as a process
+    # @param [Nokogiri::XML::Builder] xml
+    # @return [Nokogiri::XML::Builder::NodeBuilder]
+    def as_process(xml)
+      xml.process(version: version,
+                  priority: priority,
+                  note: note,
+                  lifecycle: lifecycle,
+                  laneId: lane_id,
+                  elapsed: elapsed,
+                  attempts: attempts,
+                  datetime: created_at.iso8601,
+                  status: status,
+                  name: process)
+    end
   end
 end

@@ -34,4 +34,28 @@ RSpec.describe WfsRails::Workflow do
       expect(parsed_xml.at_xpath('//milestone').content).to eq 'submitted'
     end
   end
+  describe '#as_process' do
+    builder = {}
+    before do
+      builder = Nokogiri::XML::Builder.new do |xml|
+        subject.as_process(xml)
+      end
+    end
+    let(:parsed_xml) { Nokogiri::XML(builder.to_xml) }
+    it 'serializes a Workflow as a process' do
+      expect(parsed_xml.at_xpath('//process'))
+        .to include(
+          ['version', /1/],
+          ['priority', /0/],
+          ['note', ''],
+          %w(lifecycle submitted),
+          %w(laneId default),
+          ['elapsed', ''],
+          ['attempts', /0/],
+          ['datetime', //],
+          ['status', ''],
+          ['name', 'start-accession']
+        )
+    end
+  end
 end

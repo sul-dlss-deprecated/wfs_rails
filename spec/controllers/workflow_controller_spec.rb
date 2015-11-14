@@ -20,4 +20,13 @@ RSpec.describe WfsRails::WorkflowController do
         .to include ['date', //], ['version', /1/]
     end
   end
+  describe 'GET workflows' do
+    it 'loads and groups ActiveRecord Relation renders workflows' do
+      wf = FactoryGirl.create(:workflow, repository: 'dor')
+      get :workflows, repo: wf.repository, druid: wf.druid, format: :xml
+      expect(assigns(:processes)).to be_an Hash
+      expect(assigns(:processes).length).to eq 1
+      expect(response).to render_template 'workflows'
+    end
+  end
 end
