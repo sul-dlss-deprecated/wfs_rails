@@ -29,5 +29,11 @@ module WfsRails
         datastream: params[:workflow]
       ).count
     end
+
+    def create
+      @workflows = WfsRails::WorkflowParser.new(
+        request.body.read, params[:druid], params[:repo]
+      ).create_workflows
+    end
   end
 end
