@@ -9,9 +9,9 @@ module WfsRails
     # @param [Nokogiri::XML::Builder] xml
     # @return [Nokogiri::XML::Builder::NodeBuilder]
     def as_milestone(xml)
-      xml.milestone(date: updated_at.to_time.iso8601, version: version) do
-        xml.text lifecycle
-      end
+      xml.milestone(lifecycle,
+                    date: updated_at.to_time.iso8601,
+                    version: version)
     end
 
     ##
