@@ -1,7 +1,9 @@
 module WfsRails
   ##
-  # API for handling workflow request
-  class WorkflowController < ApplicationController
+  # API for handling workflow request. Implemented as an isolated Rails::Engine
+  # controller, WfsRails::ApplicationController by default doesn't inherit from
+  # a consuming application's `ApplicationController`
+  class WorkflowController < WfsRails::ApplicationController
     def lifecycle
       @objects = Workflow.where(
         repository: params[:repo], druid: params[:druid]
