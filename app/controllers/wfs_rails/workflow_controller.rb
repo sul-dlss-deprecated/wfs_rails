@@ -4,18 +4,25 @@ module WfsRails
   # controller, WfsRails::ApplicationController by default doesn't inherit from
   # a consuming application's `ApplicationController`
   class WorkflowController < WfsRails::ApplicationController
+    
+    ##
+    # Returns the set of milestones that this object has achieved
+    #
+    # @return [Array<Workflow>] and sets `@objects`
     def lifecycle
       @objects = Workflow.where(
-        repository: params[:repo], druid: params[:druid]
+        repository: params[:repo], druid: params[:druid], status: %w(completed skipped)
       )
     end
 
+    # @return [Array<Workflow>] and sets `@processes`
     def workflows
       @processes = Workflow.where(
         repository: params[:repo], druid: params[:druid]
       ).order(:datastream, created_at: :asc).group_by(&:datastream)
     end
 
+    # @return [Array<Workflow>] and sets `@processes`
     def workflows_by_datastream
       @processes = Workflow.where(
         repository: params[:repo],
@@ -25,6 +32,7 @@ module WfsRails
       render :workflows
     end
 
+    # @return [Array<Workflow>] and sets `@objects`
     def archive
       @objects = Workflow.where(
         repository: params[:repository],
@@ -32,6 +40,7 @@ module WfsRails
       ).count
     end
 
+    # @return [Array<Workflow>] and sets `@workflows`
     def create
       @workflows = WfsRails::WorkflowParser.new(
         request.body.read, params[:druid], params[:repo]

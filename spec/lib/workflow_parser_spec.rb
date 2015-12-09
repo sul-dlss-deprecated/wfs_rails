@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe WfsRails::WorkflowParser do
   include XmlFixtures
 
-  let(:druid) { 'druid:abc123' }
+  let(:druid) { 'druid:aa111bb2222' }
   let(:repository) { 'dor' }
   let(:wf_parser) { described_class.new(workflow_create, druid, repository) }
   describe '#create_workflows' do
