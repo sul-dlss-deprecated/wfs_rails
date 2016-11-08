@@ -36,7 +36,11 @@ RSpec.describe WfsRails::WorkflowController do
     let(:request_data) { workflow_create }
     it 'creates new workflows' do
       expect do
-        put :create, request_data, repo: repository, druid: druid, workflow: workflow, format: :xml
+        if Rails::VERSION::MAJOR >= 5
+          put :create, body: request_data, params: { repo: repository, druid: druid, workflow: workflow, format: :xml }
+        else
+          put :create, request_data, repo: repository, druid: druid, workflow: workflow, format: :xml
+        end
       end.to change(WfsRails::Workflow, :count)
         .by(Nokogiri::XML(workflow_create).xpath('//process').count)
     end
