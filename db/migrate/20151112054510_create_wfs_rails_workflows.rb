@@ -1,4 +1,4 @@
-class CreateWfsRailsWorkflows < ActiveRecord::Migration
+class CreateWfsRailsWorkflows < ActiveRecord::Migration[5.0]
   def change
     create_table :wfs_rails_workflows do |t|
       t.string      :druid, null: false
