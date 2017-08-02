@@ -16,10 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'LICENSE.txt', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'rails', '>= 4.2.4', '< 6'
+  s.add_dependency 'rails', '~> 5.0'
 
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'engine_cart', '~> 0.8'
+  s.add_development_dependency 'engine_cart', '~> 1.0'
   s.add_development_dependency 'rspec-rails', '~> 3.0'
   s.add_development_dependency 'factory_girl_rails'
   s.add_development_dependency 'database_cleaner'

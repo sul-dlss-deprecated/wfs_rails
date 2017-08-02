@@ -6,7 +6,7 @@ RSpec.describe WfsRails::WorkflowController do
   describe 'GET lifecycle' do
     it 'loads ActiveRecord Relation and parses it to valid XML' do
       wf = FactoryGirl.create(:workflow, repository: 'dor')
-      get :lifecycle, repo: wf.repository, druid: wf.druid, format: :xml
+      get :lifecycle, params: { repo: wf.repository, druid: wf.druid, format: :xml }
       expect(assigns(:objects)).to be_an ActiveRecord::Relation
       expect(assigns(:objects).count).to eq 1
       expect(response).to render_template 'lifecycle'
@@ -15,7 +15,7 @@ RSpec.describe WfsRails::WorkflowController do
   describe 'GET workflows' do
     it 'loads and groups ActiveRecord Relation renders workflows' do
       wf = FactoryGirl.create(:workflow, repository: 'dor')
-      get :workflows, repo: wf.repository, druid: wf.druid, format: :xml
+      get :workflows, params: { repo: wf.repository, druid: wf.druid, format: :xml }
       expect(assigns(:processes)).to be_an Hash
       expect(assigns(:processes).length).to eq 1
       expect(response).to render_template 'workflows'
@@ -24,7 +24,7 @@ RSpec.describe WfsRails::WorkflowController do
   describe 'GET archive' do
     it 'loads count of workflows' do
       wf = FactoryGirl.create(:workflow, repository: 'dor')
-      get :archive, repository: wf.repository, workflow: wf.datastream, format: :xml
+      get :archive, params: { repository: wf.repository, workflow: wf.datastream, format: :xml }
       expect(assigns(:objects)).to eq 1
       expect(response).to render_template 'archive'
     end
@@ -36,11 +36,7 @@ RSpec.describe WfsRails::WorkflowController do
     let(:request_data) { workflow_create }
     it 'creates new workflows' do
       expect do
-        if Rails::VERSION::MAJOR >= 5
-          put :create, body: request_data, params: { repo: repository, druid: druid, workflow: workflow, format: :xml }
-        else
-          put :create, request_data, repo: repository, druid: druid, workflow: workflow, format: :xml
-        end
+        put :create, body: request_data, params: { repo: repository, druid: druid, workflow: workflow, format: :xml }
       end.to change(WfsRails::Workflow, :count)
         .by(Nokogiri::XML(workflow_create).xpath('//process').count)
     end
