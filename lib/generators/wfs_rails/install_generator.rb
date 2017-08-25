@@ -5,9 +5,5 @@ module WfsRails
         mount WfsRails::Engine => '/'
       EOF
     end
-
-    def install_migrations
-      rake('wfs_rails:install:migrations')
-    end
   end
 end
