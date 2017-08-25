@@ -9,5 +9,6 @@ class TestAppGenerator < Rails::Generators::Base
 
   def install_engine
     generate 'wfs_rails:install'
+    rake 'wfs_rails:install:migrations'
   end
 end
