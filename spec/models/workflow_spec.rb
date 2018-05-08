@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe WfsRails::Workflow do
   subject do
     described_class.create(
-      druid: 'druid:abc123',
+      druid: 'druid:aa111bb2222',
       datastream: 'accessionWF',
       process: 'start-accession',
-      lifecycle: 'submitted'
+      lifecycle: 'submitted',
+      status: 'skipped'
     )
   end
   context 'with required values' do
@@ -53,8 +54,8 @@ RSpec.describe WfsRails::Workflow do
           ['elapsed', ''],
           ['attempts', /0/],
           ['datetime', //],
-          ['status', ''],
-          ['name', 'start-accession']
+          %w(status skipped),
+          %w(name start-accession)
         )
     end
   end

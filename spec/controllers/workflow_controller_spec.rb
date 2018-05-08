@@ -30,7 +30,7 @@ RSpec.describe WfsRails::WorkflowController do
     end
   end
   describe 'PUT create' do
-    let(:druid) { 'druid:abc123' }
+    let(:druid) { 'druid:aa111bb2222' }
     let(:workflow) { 'accessionWF' }
     let(:repository) { 'dor' }
     let(:request_data) { workflow_create }
