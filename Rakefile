@@ -15,8 +15,6 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
 end
 
-EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
-
 desc 'Run test suite'
 task ci: ['wfs_rails:generate'] do
   Rake::Task['wfs_rails:coverage'].invoke
