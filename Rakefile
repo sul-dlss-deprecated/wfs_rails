@@ -15,6 +15,8 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
 end
 
+ENV['ENGINE_CART_RAILS_OPTIONS'] = '--api'
+
 desc 'Run test suite'
 task ci: ['wfs_rails:generate'] do
   Rake::Task['wfs_rails:coverage'].invoke

@@ -2,6 +2,7 @@ module WfsRails
   class Engine < ::Rails::Engine
     isolate_namespace WfsRails
 
+    require 'jbuilder'
     require 'wfs_rails/workflow_parser'
     require 'wfs_rails/process_parser'
 
