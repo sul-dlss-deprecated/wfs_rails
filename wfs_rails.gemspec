@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'rails', '~> 5.0'
+  s.add_dependency 'jbuilder', '~> 2.7'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'engine_cart', '~> 2.0'
