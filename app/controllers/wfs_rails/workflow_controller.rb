@@ -10,13 +10,13 @@ module WfsRails
       )
     end
 
-    def workflows
+    def index
       @processes = Workflow.where(
         repository: params[:repo], druid: params[:druid]
       ).order(:datastream, created_at: :asc).group_by(&:datastream)
     end
 
-    def workflows_by_datastream
+    def show
       @processes = Workflow.where(
         repository: params[:repo],
         druid: params[:druid],
