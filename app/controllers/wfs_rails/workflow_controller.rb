@@ -25,6 +25,15 @@ module WfsRails
       render :workflows
     end
 
+    def destroy
+      @processes = Workflow.where(
+        repository: params[:repo],
+        druid: params[:druid],
+        datastream: params[:workflow]
+      ).destroy_all
+      head :no_content
+    end
+
     def archive
       @objects = Workflow.where(
         repository: params[:repository],
