@@ -3,5 +3,6 @@ FactoryGirl.define do
     druid 'druid:abc123'
     datastream 'ds'
     process 'proc'
+    repository 'dor'
   end
 end
