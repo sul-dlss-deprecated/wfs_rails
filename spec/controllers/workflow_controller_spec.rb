@@ -14,7 +14,7 @@ RSpec.describe WfsRails::WorkflowController do
       expect(response).to render_template 'lifecycle'
     end
   end
-  describe 'GET workflows' do
+  describe 'GET index' do
     it 'loads and groups ActiveRecord Relation renders workflows' do
       wf = FactoryGirl.create(:workflow)
       get :index, params: { repo: wf.repository, druid: wf.druid, format: :xml }
@@ -23,6 +23,17 @@ RSpec.describe WfsRails::WorkflowController do
       expect(response).to render_template 'index'
     end
   end
+
+  describe 'GET show' do
+    it 'loads and groups ActiveRecord Relation renders workflows' do
+      wf = FactoryGirl.create(:workflow)
+      get :show, params: { repo: wf.repository, druid: wf.druid, workflow: wf.datastream, format: :xml }
+      expect(assigns(:processes)).to be_an Hash
+      expect(assigns(:processes).length).to eq 1
+      expect(response).to render_template 'index'
+    end
+  end
+
   describe 'GET archive' do
     it 'loads count of workflows' do
       wf = FactoryGirl.create(:workflow)

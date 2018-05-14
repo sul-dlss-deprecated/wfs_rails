@@ -22,7 +22,7 @@ module WfsRails
         druid: params[:druid],
         datastream: params[:workflow]
       ).order(:datastream, created_at: :asc).group_by(&:datastream)
-      render :workflows
+      render :index
     end
 
     def destroy
