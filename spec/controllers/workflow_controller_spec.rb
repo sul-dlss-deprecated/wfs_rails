@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe WfsRails::WorkflowController do
@@ -31,6 +33,15 @@ RSpec.describe WfsRails::WorkflowController do
       expect(assigns(:processes)).to be_an Hash
       expect(assigns(:processes).length).to eq 1
       expect(response).to render_template 'index'
+    end
+  end
+
+  describe 'PUT update' do
+    it 'updates the process to complete' do
+      wf = FactoryGirl.create(:workflow)
+      put :update, params: { repo: wf.repository, druid: wf.druid, workflow: wf.datastream, process: wf.process }
+      expect(wf.reload.status).to eq 'completed'
+      expect(response).to be_no_content
     end
   end
 

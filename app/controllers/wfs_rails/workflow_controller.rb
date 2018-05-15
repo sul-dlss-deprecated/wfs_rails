@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module WfsRails
   ##
   # API for handling workflow request. Implemented as an isolated Rails::Engine
@@ -24,6 +26,22 @@ module WfsRails
       ).order(:datastream, created_at: :asc).group_by(&:datastream)
       render :index
     end
+
+    def update
+      @process = Workflow.find_by!(
+        repository: params[:repo],
+        druid: params[:druid],
+        datastream: params[:workflow],
+        process: params[:process]
+      )
+
+      if params['current-status'].present?
+        @process.update(status: params['current-status'])
+      else
+        @process.update(status: 'completed')
+      end
+      head :no_content
+   end
 
     def destroy
       @processes = Workflow.where(
