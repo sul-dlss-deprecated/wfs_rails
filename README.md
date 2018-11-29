@@ -36,3 +36,6 @@ To set up and use WFS Rails in your project, take a look at this Argo pull reque
 
 https://github.com/sul-dlss/argo/pull/317/files
 
+Or this stanalone server:
+
+https://github.com/sul-dlss-labs/workflow-server-rails/
